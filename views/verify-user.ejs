@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Details</title>
+  </head>
+  <body>
+    <h2>Verify Advisor User Details to become Advisor</h2>
+    <form action="/auth/verify-user-details" method="post">
+      <input type="text" name="name" placeholder="Name/Trade Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input
+        type="text"
+        name="regNo"
+        placeholder="Registration Number"
+        id="regNo"
+      />
+      <input
+        type="text"
+        name="contactPerson"
+        placeholder="Contact Person"
+        id="contactPerson"
+      />
+      <input type="text" name="location" placeholder="Location" id="location" />
+      <button type="submit">Verify Advisor</button>
+    </form>
+  </body>
+</html>

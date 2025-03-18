@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security PIN Verification</title>
+  </head>
+  <body>
+    <h2>Enter Your Security PIN</h2>
+
+    <% if (error_msg) { %>
+    <p style="color: red"><%= error_msg %></p>
+    <% } %>
+
+    <form action="/auth/verify-pin" method="POST">
+      <label for="securityPin">Security PIN:</label>
+      <input type="password" name="securityPin" required />
+      <button type="submit">Verify PIN</button>
+    </form>
+  </body>
+</html>

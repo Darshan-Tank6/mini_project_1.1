@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <h2>Welcome to InvestRight</h2>
+    <% if(!user) { %>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/register">Register</a>
+    <%} else { %>
+    <a href="/tips">Tips</a>
+    <a href="/reports">Reports</a>
+    <a href="/auth/logout">logout</a>
+    <% if (user.role != "advisor") { %>
+    <a href="/auth/verify-user-details">Become Advisor</a>
+    <% } %>
+    <a href="/auth/verify-user-details">Already a Advisor</a>
+    <a href="/auth/profile-page">Profile Page</a>
+    <%}%>
+  </body>
+</html>

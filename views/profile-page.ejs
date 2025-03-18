@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>User Profile</h1>
+    <p><strong>Name:</strong> <%= user.name %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Role:</strong> <%= user.role %></p>
+
+    <h2>Reports Submitted (<%= submittedCount %>)</h2>
+    <% if (submittedReports.length > 0) { %>
+    <ul>
+      <% submittedReports.forEach(report => { %>
+      <li><strong><%= report.title %></strong> - <%= report.status %></li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No reports submitted.</p>
+    <% } %>
+
+    <h2>Reports Verified (<%= verifiedCount %>)</h2>
+    <% if (verifiedReports.length > 0) { %>
+    <ul>
+      <% verifiedReports.forEach(report => { %>
+      <li><strong><%= report.title %></strong> - Verified</li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No reports verified.</p>
+    <% } %>
+
+    <h2>Tips Submitted (<%= submittedTipCount %>)</h2>
+    <% if (submittedTips.length > 0) { %>
+    <ul>
+      <% submittedTips.forEach(tip => { %>
+      <li><strong><%= tip.title %></strong> - <%= tip.content %></li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No Tips submitted.</p>
+    <% } %>
+
+    <a href="/auth/home">Back to Dashboard</a>
+  </body>
+</html>

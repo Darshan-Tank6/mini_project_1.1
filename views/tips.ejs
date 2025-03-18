@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Market Tips</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Stock Market Tips</h1>
+
+    <form action="/tips/add" method="POST">
+      <input type="text" name="title" placeholder="Tip Title" required />
+      <textarea
+        name="content"
+        placeholder="Write your tip here..."
+        required
+      ></textarea>
+      <button type="submit">Submit Tip</button>
+    </form>
+
+    <a href="/auth/home">Home</a>
+    <!-- <a href="/auth/logout">Log out</a> -->
+
+    <h2>All Tips</h2>
+    <% if (tips.length > 0) { %> <% tips.forEach(tip => { %>
+    <div class="tip-card">
+      <h3><%= tip.title %></h3>
+      <p><%= tip.content %></p>
+      <p><strong>Posted by:</strong> <%= tip.postedBy.name %></p>
+      <p>
+        <strong>Votes:</strong> 👍 <%= tip.upVotes.length %> | 👎 <%=
+        tip.downVotes.length %>
+      </p>
+      <p>
+        <small
+          >Posted on: <%= new Date(tip.createdOn).toLocaleString() %></small
+        >
+      </p>
+      <form action="/tips/<%= tip._id %>/upvote" method="POST">
+        <button type="submit">👍 Upvote</button>
+      </form>
+      <form action="/tips/<%= tip._id %>/downvote" method="POST">
+        <button type="submit">👎 Downvote</button>
+      </form>
+      <% if (user && user.role != "user") {%>
+      <form
+        action="/tips/<%= tip._id %>/delete"
+        method="POST"
+        onsubmit="return confirm('Are you sure?');"
+      >
+        <button type="submit">❌ Delete</button>
+      </form>
+      <% } %>
+    </div>
+    <% }); %> <% } else { %>
+    <p>No tips available.</p>
+    <% } %>
+  </body>
+</html>
