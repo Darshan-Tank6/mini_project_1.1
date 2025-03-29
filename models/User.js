@@ -107,6 +107,10 @@ const userSchema = new mongoose.Schema({
 
   verified: { type: Boolean, default: false }, // Field to track verification status
 
+  // 🔹 PIN Reset Fields
+  resetPinToken: { type: String, default: null },
+  resetPinExpires: { type: Date, default: null },
+
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -148,5 +152,21 @@ userSchema.pre("validate", function (next) {
   }
   next();
 });
+
+// 🔹 Generate Reset Token (For Password & PIN)
+userSchema.methods.generateResetToken = function (type) {
+  const token = crypto.randomBytes(32).toString("hex");
+  const expires = Date.now() + 3600000; // 1 hour expiry
+
+  if (type === "password") {
+    this.resetPasswordToken = token;
+    this.resetPasswordExpires = expires;
+  } else if (type === "pin") {
+    this.resetPinToken = token;
+    this.resetPinExpires = expires;
+  }
+
+  return token;
+};
 
 module.exports = mongoose.model("User", userSchema);

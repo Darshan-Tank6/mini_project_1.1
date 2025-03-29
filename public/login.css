@@ -1,0 +1,79 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url("/bull.png") no-repeat center center;
+  background-size: cover;
+}
+
+/* Login Container */
+.login-container {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 40px;
+  width: 90%;
+  max-width: 700px;
+  height: 500px;
+  box-sizing: border-box;
+  opacity: 1x;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin: 0 0 20px;
+  font-size: 50px;
+  color: #1c1f26;
+}
+
+input[type="text"],
+input[type="password"] {
+  margin-bottom: 30px;
+  padding: 15px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 17px;
+  background: #00b894;
+  color: white;
+  font-size: 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+button:hover {
+  background: #019474;
+}
+
+/* Signup Link */
+p {
+  margin-top: 20px;
+  padding-top: 10px;
+  font-size: 25px;
+}
+
+p a {
+  color: #00b894;
+  text-decoration: none;
+}
+p a:hover {
+  text-decoration: underline;
+}
+
+.sebi {
+  margin: 10px;
+  padding: 10px;
+}

@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 0;
+  background-color: #ffffff;
+  background: url("Background-PNG-HD-Isolated.png") no-repeat;
+}
+
+h1,
+h2 {
+  text-align: center;
+  font-size: 40px;
+}
+
+form {
+  max-width: 600px;
+  height: 200px;
+  margin: 50px auto;
+  padding: 15px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+input,
+textarea,
+button {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items: center;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: darkgrey;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.tip-card {
+  max-width: 600px;
+  margin: 25px auto;
+  padding: 15px;
+  background: white;
+  border-left: 5px solid #007bff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.tip-card h3 {
+  margin: 0;
+  color: #333;
+}
+
+.tip-card p {
+  margin: 5px 0;
+}
+
+button.vote {
+  background-color: #28a745;
+}
+
+button.vote:hover {
+  background-color: #218838;
+}
+
+button.delete {
+  background-color: #dc3545;
+}
+
+button.delete:hover {
+  background-color: #c82333;
+}

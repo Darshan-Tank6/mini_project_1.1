@@ -1,0 +1,52 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Profiles</title>
+  </head>
+  <body>
+    <ul>
+      <% if(users.length > 0 ){ %> <% users.forEach(user => { %>
+      <li>
+        User name: <%= user.name %> email: <%= user.email %>
+        <a href="/admin/delete/<%= user._id %>">Delete user</a>
+        <a href="/admin/update-profile/<%= user._id%>">Update profile</a>
+      </li>
+      <%});%> <% } %>
+    </ul>
+    <a href="/auth/home">Home</a>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Profiles</title>
+    <link rel="stylesheet" href="/display-profiles.css" />
+  </head>
+  <body>
+    <h1>All User Profiles</h1>
+    <ul>
+      <% if(users.length > 0 ){ %> <% users.forEach(user => { %>
+      <li>
+        <div>
+          <strong>User:</strong> <%= user.name %> <br />
+          <strong>Email:</strong> <%= user.email %>
+        </div>
+        <div class="buttons">
+          <a href="/admin/delete/<%= user._id %>" class="delete-btn">Delete</a>
+          <a href="/admin/update-profile/<%= user._id%>" class="update-btn"
+            >Update</a
+          >
+        </div>
+      </li>
+      <% }); %> <% } else { %>
+      <p>No users found.</p>
+      <% } %>
+    </ul>
+    <a href="/auth/home" class="home-link">Home</a>
+  </body>
+</html>

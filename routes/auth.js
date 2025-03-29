@@ -444,7 +444,13 @@ router.post("/verify-user-details", async (req, res) => {
       // Update user role & verification status
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { role: "advisor", verified: true },
+        {
+          role: "advisor",
+          verified: true,
+          regNo: regNo,
+          location: location,
+          contactPerson: contactPerson,
+        },
         { new: true }
       );
 
@@ -571,6 +577,70 @@ router.get("/profile-page", ensureAuthenticated, async (req, res) => {
     req.flash("error_msg", "Error loading profile.");
     res.redirect("/auth/home");
   }
+});
+
+router.get("/reset-password", async (req, res) => {
+  res.render("reset-password");
+});
+
+router.get("/reset-pin", async (req, res) => {
+  res.render("reset-pin");
+});
+
+// 📌 Reset Password (Requires Current Password)
+router.post("/reset-password", ensureAuthenticated, async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const user = await User.findById(req.user._id);
+
+  if (!user) return res.status(404).json({ error: "User not found" });
+
+  if (!user || !(await user.comparePassword(currentPassword))) {
+    req.flash("error_msg", "Invalid password .");
+    return res.redirect("profile-page");
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  //res.redirect("profile-page");
+  res.json({ message: "Password successfully updated!" });
+});
+
+// 📌 Reset Security PIN (Requires Current PIN)
+router.post("/reset-pin", ensureAuthenticated, async (req, res) => {
+  const { currentPin, newPin } = req.body;
+  const user = await User.findById(req.user._id);
+
+  if (!user) return res.status(404).json({ error: "User not found" });
+
+  if (!user || !(await user.compareSecurityPin(currentPin))) {
+    req.flash("error_msg", "Invalid PIN.");
+    return res.redirect("profile-page");
+  }
+
+  user.securityPin = newPin;
+  await user.save();
+
+  res.json({ message: "Security PIN successfully updated!" });
+});
+
+router.post("/delete/self/:id", async (req, res) => {
+  const password = req.body;
+  const user = await User.findById(req.params.id);
+  if (!user || !(await user.comparePassword(password))) {
+    req.flash("error_msg", "Invalid password .");
+    return res.redirect("profile-page");
+  }
+  await user.deleteOne();
+  res.redirect("profile-page");
+});
+
+router.get("/delete/self", async (req, res) => {
+  res.render("delete-confirm");
+});
+
+router.get("/setting", async (req, res) => {
+  res.render("settings");
 });
 
 module.exports = router;

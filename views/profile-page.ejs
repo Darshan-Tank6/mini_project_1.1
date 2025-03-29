@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -45,6 +45,187 @@
     <p>No Tips submitted.</p>
     <% } %>
 
+    <button>Open reset password modal</button>
+    <div class="modal reset-password" style="display: none">
+      <form action="/auth/reset-password" method="post">
+        <input
+          type="password"
+          name="currentPassword"
+          placeholder="Current Password"
+          required
+        />
+        <input
+          type="password"
+          name="newPassword"
+          placeholder="New Password"
+          required
+        />
+        <button type="submit">Change Password</button>
+      </form>
+    </div>
+
+    <a href="/auth/reset-password">reset password page</a>
+
+    <button>Open reset pin modal</button>
+    <div class="modal reset-pin" style="display: none">
+      <form action="/auth/reset-pin" method="post">
+        <input
+          type="password"
+          name="currentPin"
+          placeholder="Current PIN"
+          required
+        />
+        <input type="password" name="newPin" placeholder="New PIN" required />
+        <button type="submit">Change PIN</button>
+      </form>
+    </div>
+    <a href="/auth/reset-pin">reset pin page</a><br />
+
+    <button>Open delete profile modal</button>
+    <div class="modal delete-profile">
+      <form action="/auth/delete/self/<%= user.Id %>">
+        <input type="password" name="password" placeholder="password" />
+        <button type="submit" onclick="return confirm('Are you sure?');">
+          Delete self profile
+        </button>
+      </form>
+      <br />
+    </div>
+
     <a href="/auth/home">Back to Dashboard</a>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/profile-page.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <!-- <nav class="navbar">
+      <h1>Stock Market Platform</h1>
+      <ul>
+        <li><a href="/auth/home">Dashboard</a></li>
+        <li><a href="#reset-password-modal">Reset Password</a></li>
+        <li><a href="#reset-pin-modal">Reset PIN</a></li>
+        <li><a href="#delete-profile-modal">Delete Profile</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+      </ul>
+    </nav> -->
+    <nav class="navbar">
+      <h1>Stock Market Platform</h1>
+      <ul>
+        <li><a href="/auth/home">Dashboard</a></li>
+        <li><a href="/tips">Tips</a></li>
+        <li><a href="/reports">Report Fraud</a></li>
+        <li><a href="/auth/profile-page">Profile</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+      </ul>
+    </nav>
+    <!-- Tabs Section -->
+    <div class="tabs">
+      <input type="radio" name="tab" id="tab1" checked />
+      <label for="tab1">Profile</label>
+
+      <input type="radio" name="tab" id="tab2" />
+      <label for="tab2">Reports</label>
+
+      <input type="radio" name="tab" id="tab3" />
+      <label for="tab3">Tips</label>
+
+      <div class="tab-content" id="content1">
+        <h2>User Profile</h2>
+        <p><strong>Name:</strong> <%= user.name %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>Role:</strong> <%= user.role %></p>
+      </div>
+
+      <div class="tab-content" id="content2">
+        <h2>Reports Submitted (<%= submittedCount %>)</h2>
+        <% if (submittedReports.length > 0) { %>
+        <ul>
+          <% submittedReports.forEach(report => { %>
+          <li><strong><%= report.title %></strong> - <%= report.status %></li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        <p>No reports submitted.</p>
+        <% } %>
+      </div>
+
+      <div class="tab-content" id="content3">
+        <h2>Tips Submitted (<%= submittedTipCount %>)</h2>
+        <% if (submittedTips.length > 0) { %>
+        <ul>
+          <% submittedTips.forEach(tip => { %>
+          <li><strong><%= tip.title %></strong> - <%= tip.content %></li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        <p>No Tips submitted.</p>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- CSS-Only Modals -->
+    <div id="reset-password-modal" class="modal">
+      <div class="modal-content">
+        <h3>Reset Password</h3>
+        <form action="/auth/reset-password" method="post">
+          <input
+            type="password"
+            name="currentPassword"
+            placeholder="Current Password"
+            required
+          />
+          <input
+            type="password"
+            name="newPassword"
+            placeholder="New Password"
+            required
+          />
+          <button type="submit">Change Password</button>
+        </form>
+        <a href="#" class="close">Close</a>
+      </div>
+    </div>
+
+    <div id="reset-pin-modal" class="modal">
+      <div class="modal-content">
+        <h3>Reset PIN</h3>
+        <form action="/auth/reset-pin" method="post">
+          <input
+            type="password"
+            name="currentPin"
+            placeholder="Current PIN"
+            required
+          />
+          <input type="password" name="newPin" placeholder="New PIN" required />
+          <button type="submit">Change PIN</button>
+        </form>
+        <a href="#" class="close">Close</a>
+      </div>
+    </div>
+
+    <div id="delete-profile-modal" class="modal">
+      <div class="modal-content">
+        <h3>Delete Profile</h3>
+        <form action="/auth/delete/self/<%= user._id %>" method="post">
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            required
+          />
+          <button type="submit" onclick="return confirm('Are you sure?');">
+            Delete Profile
+          </button>
+        </form>
+        <a href="#" class="close">Close</a>
+      </div>
+    </div>
   </body>
 </html>

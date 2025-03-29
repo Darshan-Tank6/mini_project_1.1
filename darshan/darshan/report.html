@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Reports - MarketTips</title>
+    <link rel="stylesheet" href="report.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Stock Market Reports</h1>
+
+      <!-- Report Submission Form -->
+      <form id="reportForm">
+        <input
+          type="text"
+          id="reportTitle"
+          placeholder="Report Title"
+          required
+        />
+        <textarea
+          id="reportContent"
+          placeholder="Write about scam/fraud here..."
+          required
+        ></textarea>
+        <button type="submit">Submit Report</button>
+      </form>
+
+      <a href="/auth/home" class="home-btn">Home</a>
+
+      <h2>All Reports</h2>
+
+      <!-- Reports Container -->
+      <div id="reportsContainer"></div>
+    </div>
+
+    <script>
+      // ====== JavaScript ======
+      // Sample Reports (Replace with API call)
+      const reports = [
+        {
+          id: 1,
+          title: "Fake Investment Platform",
+          content: "Beware of this fake platform promising 100% returns.",
+          postedBy: "John Doe",
+          createdOn: "2025-03-21 10:00 AM",
+          status: "Pending",
+          verifiedBy: [],
+        },
+        {
+          id: 2,
+          title: "Ponzi Scheme Alert",
+          content: "Company XYZ running Ponzi scheme, avoid investing!",
+          postedBy: "Jane Smith",
+          createdOn: "2025-03-20 11:30 AM",
+          status: "Verified",
+          verifiedBy: ["Admin"],
+        },
+      ];
+
+      // Load Reports
+      const reportsContainer = document.getElementById("reportsContainer");
+
+      function loadReports() {
+        reportsContainer.innerHTML = ""; // Clear container before loading
+
+        if (reports.length === 0) {
+          reportsContainer.innerHTML = "<p>No reports available.</p>";
+          return;
+        }
+
+        reports.forEach((report) => {
+          const card = document.createElement("div");
+          card.className = "tip-card";
+
+          card.innerHTML = `
+          <h3>${report.title}</h3>
+          <p>${report.content}</p>
+          <p><strong>Posted by:</strong> ${report.postedBy}</p>
+          <p><small>Posted on: ${report.createdOn}</small></p>
+          <p>Status: ${report.status}</p>
+          <p><strong>Verified By:</strong> ${
+            report.verifiedBy.length > 0
+              ? report.verifiedBy.join(", ")
+              : "Not verified yet."
+          }</p>
+
+          <div class="action-buttons">
+            <button onclick="verifyReport(${report.id})">Verify</button>
+            <button onclick="deleteReport(${report.id})">❌ Delete</button>
+          </div>
+        `;
+
+          reportsContainer.appendChild(card);
+        });
+      }
+
+      // Submit Report
+      document.getElementById("reportForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById("reportTitle").value;
+        const content = document.getElementById("reportContent").value;
+
+        const newReport = {
+          id: reports.length + 1,
+          title,
+          content,
+          postedBy: "You",
+          createdOn: new Date().toLocaleString(),
+          status: "Pending",
+          verifiedBy: [],
+        };
+
+        reports.push(newReport);
+        alert("Report submitted!");
+        loadReports();
+
+        // Clear form
+        document.getElementById("reportForm").reset();
+      });
+
+      // Verify Report
+      function verifyReport(id) {
+        const report = reports.find((r) => r.id === id);
+        if (report) {
+          report.status = "Verified";
+          report.verifiedBy.push("Admin");
+          loadReports();
+        }
+      }
+
+      // Delete Report
+      function deleteReport(id) {
+        const index = reports.findIndex((r) => r.id === id);
+        if (
+          index !== -1 &&
+          confirm("Are you sure you want to delete this report?")
+        ) {
+          reports.splice(index, 1);
+          loadReports();
+        }
+      }
+
+      // Load initial reports on page load
+      window.onload = loadReports;
+    </script>
+  </body>
+</html>

@@ -3,14 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/login.css" />
   </head>
   <body>
-    <form action="/auth/login" method="post">
-      <input type="email" name="email" placeholder="email" required />
-      <input type="password" name="password" placeholder="password" required />
-      <button type="submit">Login</button>
-    </form>
-    <a href="/auth/register">Register</a>
+    <div class="login-container">
+      <h2>Login</h2>
+      <form action="/auth/login" method="post" id="loginForm">
+        <input
+          id="name"
+          type="text"
+          name="email"
+          placeholder="email"
+          required
+        />
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="password"
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+      <p class="signup-dropdown">
+        Don't have an account? <a href="/auth/register">Register</a>
+      </p>
+    </div>
   </body>
 </html>

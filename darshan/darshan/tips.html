@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Stock Market Tips</title>
+    <link rel="stylesheet" href="tips.css" />
+  </head>
+  <body>
+    <a href="#">Home</a>
+    <h1>Stock Market Tips</h1>
+
+    <!-- Admin Tip Form -->
+    <div id="admin-form" style="display: none">
+      <form id="tip-form">
+        <input type="text" id="tip-title" placeholder="Tip Title" required />
+        <textarea
+          id="tip-content"
+          placeholder="Write your tip here..."
+          required
+        ></textarea>
+        <button type="submit">Submit Tip</button>
+      </form>
+    </div>
+
+    <h2>All Tips</h2>
+    <div id="tips-container">
+      <p>No tips available.</p>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Simulated user data (replace with real auth logic if needed)
+        const user = {
+          role: "admin", // Change to "user" for regular user view
+        };
+
+        // Dummy Tips (simulate API)
+        let tips = [
+          {
+            id: 1,
+            title: "Invest in Blue Chip Stocks",
+            content:
+              "Blue chip stocks have a reliable track record of performance.",
+            postedBy: "John Doe",
+            upVotes: 12,
+            downVotes: 2,
+            createdOn: new Date().toLocaleString(),
+          },
+          {
+            id: 2,
+            title: "Avoid Panic Selling",
+            content: "Market dips are normal, don’t sell in a panic.",
+            postedBy: "Jane Smith",
+            upVotes: 20,
+            downVotes: 5,
+            createdOn: new Date().toLocaleString(),
+          },
+        ];
+
+        const tipsContainer = document.getElementById("tips-container");
+
+        // Show Admin Form if user is not 'user'
+        if (user.role !== "user") {
+          document.getElementById("admin-form").style.display = "block";
+        }
+
+        // Handle Tip Form Submission (Add New Tip)
+        const tipForm = document.getElementById("tip-form");
+        if (tipForm) {
+          tipForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const title = document.getElementById("tip-title").value;
+            const content = document.getElementById("tip-content").value;
+
+            const newTip = {
+              id: Date.now(),
+              title: title,
+              content: content,
+              postedBy: "Admin",
+              upVotes: 0,
+              downVotes: 0,
+              createdOn: new Date().toLocaleString(),
+            };
+
+            tips.push(newTip);
+            renderTips();
+            tipForm.reset();
+          });
+        }
+
+        // Render Tips
+        function renderTips() {
+          tipsContainer.innerHTML = "";
+
+          if (tips.length === 0) {
+            tipsContainer.innerHTML = "<p>No tips available.</p>";
+            return;
+          }
+
+          tips.forEach((tip) => {
+            const tipCard = document.createElement("div");
+            tipCard.classList.add("tip-card");
+            tipCard.innerHTML = `
+                        <h3>${tip.title}</h3>
+                        <p>${tip.content}</p>
+                        <p><strong>Posted by:</strong> ${tip.postedBy}</p>
+                        <p><strong>Votes:</strong> 👍 ${tip.upVotes} | 👎 ${
+              tip.downVotes
+            }</p>
+                        <p><small>Posted on: ${tip.createdOn}</small></p>
+                        <button onclick="vote(${
+                          tip.id
+                        }, 'up')">👍 Upvote</button>
+                        <button onclick="vote(${
+                          tip.id
+                        }, 'down')">👎 Downvote</button>
+                        ${
+                          user.role !== "user"
+                            ? `<button class="delete" onclick="deleteTip(${tip.id})">❌ Delete</button>`
+                            : ""
+                        }
+                    `;
+            tipsContainer.appendChild(tipCard);
+          });
+        }
+
+        // Handle Upvote and Downvote
+        window.vote = function (id, type) {
+          tips = tips.map((tip) => {
+            if (tip.id === id) {
+              if (type === "up") tip.upVotes++;
+              else tip.downVotes++;
+            }
+            return tip;
+          });
+          renderTips();
+        };
+
+        // Handle Tip Deletion
+        window.deleteTip = function (id) {
+          if (confirm("Are you sure?")) {
+            tips = tips.filter((tip) => tip.id !== id);
+            renderTips();
+          }
+        };
+
+        // Initial Render
+        renderTips();
+      });
+    </script>
+  </body>
+</html>

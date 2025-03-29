@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Security PIN</title>
+    <link rel="stylesheet" href="/public/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Reset Security PIN</h2>
+      <form action="/auth/reset-pin" method="post">
+        <input
+          type="password"
+          name="currentPin"
+          placeholder="Current PIN"
+          required
+        />
+        <input type="password" name="newPin" placeholder="New PIN" required />
+        <button type="submit">Change PIN</button>
+      </form>
+      <a href="/auth/home">Back to Dashboard</a>
+    </div>
+  </body>
+</html>

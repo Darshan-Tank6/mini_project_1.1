@@ -129,6 +129,7 @@ require("./config/passport"); // Load Passport strategy
 const tipsRoutes = require("./routes/tips");
 const authRoutes = require("./routes/auth");
 const reportRoutes = require("./routes/report");
+const adminRoutes = require("./routes/admin");
 
 const app = express();
 
@@ -136,7 +137,19 @@ const app = express();
 connectDB();
 
 // 📌 Security Middlewares
-app.use(helmet()); // Secure HTTP headers
+// app.use(helmet()); // Secure HTTP headers
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      },
+    },
+  })
+);
 app.use(compression()); // Gzip compression for performance
 
 // 📌 Rate Limiting (Prevents brute force attacks)
@@ -145,7 +158,8 @@ const limiter = rateLimit({
   max: 100, // Limit each IP to 100 requests per window
   message: "Too many requests from this IP, please try again later.",
 });
-app.use(limiter);
+
+//app.use(limiter);
 
 // 📌 Session Setup (With Secure Cookie)
 app.use(
@@ -190,6 +204,7 @@ app.use((req, res, next) => {
 app.use("/auth", authRoutes);
 app.use("/tips", tipsRoutes);
 app.use("/reports", reportRoutes);
+app.use("/admin", adminRoutes);
 
 // 📌 Home Route
 app.get("/", (req, res) => res.redirect("/auth/login"));

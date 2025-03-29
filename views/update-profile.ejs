@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update profile</title>
+  </head>
+  <body>
+    <h2>Update Profile</h2>
+    <form action="/admin/update-profile" method="post">
+      <!-- Take update inputs and then save them -->
+      <input
+        type="text"
+        name="name"
+        placeholder="name"
+        value="<%= user.name %>"
+      />
+      <!-- <input
+        type="text"
+        name="email"
+        placeholder="email"
+        value="<%= user.email %>"
+      /> -->
+      <select name="role">
+        <option value="admin">Admin</option>
+        <option value="advisor">Advisor</option>
+        <option value="user">User</option>
+      </select>
+      <% if(user.role != 'user') {%>
+      <input
+        type="text"
+        name="regNO"
+        placeholder="reg no"
+        value="<%= user.regNO %>"
+      />
+      <input
+        type="text"
+        name="contactPerson"
+        placeholder="contact person"
+        value="<%= user.contactPerson %>"
+      />
+      <input
+        type="text"
+        name="location"
+        placeholder="location"
+        value="<%= user.location%>"
+      />
+      <%}%>
+      <button type="submit">Update</button>
+    </form>
+  </body>
+</html>

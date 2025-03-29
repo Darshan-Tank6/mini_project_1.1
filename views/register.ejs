@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     <!-- <script src="/public/script.js"></script> -->
+    <link rel="stylesheet" href="/signup.css" />
   </head>
   <body>
     <!-- <input
@@ -31,20 +32,42 @@
       onclick="updateHiddenInput(this)"
     />
     <label for="admn">Admin</label> -->
-    <form action="/auth/register" method="post">
-      <input type="text" name="name" placeholder="User Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="hidden" name="role" id="role" value="user" />
-      <input
-        type="password"
-        name="securityPin"
-        placeholder="Security Pin"
-        required
-      />
-      <input type="password" name="password" placeholder="password" required />
-      <button type="submit">Register</button>
-    </form>
-    <a href="/auth/login">Login</a>
+    <div class="signup-container">
+      <h2>Register</h2>
+      <form action="/auth/register" method="post" id="signupForm">
+        <input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="User Name"
+          required
+        />
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+        />
+        <input type="hidden" name="role" id="role" value="user" />
+        <input
+          id="securityPin"
+          type="password"
+          name="securityPin"
+          placeholder="Security Pin"
+          required
+        />
+        <input
+          is="password"
+          type="password"
+          name="password"
+          placeholder="password"
+          required
+        />
+        <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="/auth/login">Login</a></p>
+    </div>
   </body>
   <!-- <script>
     function updateHiddenInput(radio) {

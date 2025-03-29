@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <link rel="stylesheet" href="/settings.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <h1>Settings</h1>
+      <ul>
+        <li><a href="/auth/home">Dashboard</a></li>
+        <li><a href="/auth/profile-page">Profile</a></li>
+        <li><a href="/auth/logout" class="logout-btn">Log Out</a></li>
+      </ul>
+    </nav>
+
+    <div class="settings-container">
+      <h2>Account Settings</h2>
+
+      <!-- Reset Password -->
+      <a href="#reset-password-modal" class="settings-btn">Reset Password</a>
+
+      <!-- Reset PIN -->
+      <a href="#reset-pin-modal" class="settings-btn">Reset PIN</a>
+
+      <!-- Delete Profile -->
+      <a href="#delete-profile-modal" class="settings-btn danger"
+        >Delete Profile</a
+      >
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div id="reset-password-modal" class="modal">
+      <div class="modal-content">
+        <h3>Reset Password</h3>
+        <form action="/auth/reset-password" method="post">
+          <input
+            type="password"
+            name="currentPassword"
+            placeholder="Current Password"
+            required
+          />
+          <input
+            type="password"
+            name="newPassword"
+            placeholder="New Password"
+            required
+          />
+          <button type="submit">Change Password</button>
+        </form>
+        <a href="#" class="close">Close</a>
+      </div>
+    </div>
+
+    <!-- Reset PIN Modal -->
+    <div id="reset-pin-modal" class="modal">
+      <div class="modal-content">
+        <h3>Reset PIN</h3>
+        <form action="/auth/reset-pin" method="post">
+          <input
+            type="password"
+            name="currentPin"
+            placeholder="Current PIN"
+            required
+          />
+          <input type="password" name="newPin" placeholder="New PIN" required />
+          <button type="submit">Change PIN</button>
+        </form>
+        <a href="#" class="close">Close</a>
+      </div>
+    </div>
+
+    <!-- Delete Profile Modal -->
+    <div id="delete-profile-modal" class="modal">
+      <div class="modal-content">
+        <h3>Delete Profile</h3>
+        <form action="/auth/delete/self/<%= user._id %>" method="post">
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            required
+          />
+          <button
+            type="submit"
+            onclick="return confirm('Are you sure? This action is irreversible!');"
+          >
+            Delete Profile
+          </button>
+        </form>
+        <a href="#" class="close">Close</a>
+      </div>
+    </div>
+  </body>
+</html>

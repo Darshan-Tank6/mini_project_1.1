@@ -3,56 +3,83 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reports</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Reports - MarketTips</title>
+    <link rel="stylesheet" href="/report.css" />
+    <link rel="stylesheet" type="text/css" href="/nav.css" />
   </head>
   <body>
-    <h1>Stock market reports</h1>
-    <form action="/reports/add" method="POST">
-      <input type="text" name="title" placeholder="Report Title" required />
-      <textarea
-        name="content"
-        placeholder="Write about scam/fraud here..."
-        required
-      ></textarea>
-      <button type="submit">Submit Report</button>
-    </form>
-
-    <a href="/auth/home">Home</a>
-    <!-- <a href="/auth/logout">Log out</a> -->
-
-    <h2>All reports</h2>
-    <% if(reports.length > 0) { %> <% reports.forEach(report => { %>
-    <div class="tip-card">
-      <h3><%= report.title %></h3>
-      <p><%= report.content %></p>
-      <p><strong>Posted by:</strong> <%= report.postedBy.name %></p>
-      <p>
-        <small
-          >Posted on: <%= new Date(report.createdOn).toLocaleString() %></small
-        >
-      </p>
-      <p>Status: <%= report.status %></p>
-      <% if (user && user.role != "user") {%>
-      <form action="/reports/<%= report._id %>/verify" method="POST">
-        <button type="submit">Verify</button>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <h1>Stock Market Platform</h1>
+      <ul>
+        <li><a href="/auth/home">Dashboard</a></li>
+        <li><a href="/tips">Tips</a></li>
+        <li><a href="/reports">Report Fraud</a></li>
+        <li><a href="/auth/profile-page">Profile</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <h1>Stock market reports</h1>
+      <form action="/reports/add" method="POST">
+        <input
+          type="text"
+          id="reportTitle"
+          name="title"
+          placeholder="Report Title"
+          required
+        />
+        <textarea
+          id="reportContent"
+          name="content"
+          placeholder="Write about scam/fraud here..."
+          required
+        ></textarea>
+        <button type="submit">Submit Report</button>
       </form>
-      <form
-        action="/reports/<%= report._id %>/delete"
-        method="POST"
-        onsubmit="return confirm('Are you sure?');"
-      >
-        <button type="submit">❌ Delete</button>
-      </form>
-      <% } %>
-      <p>
-        <strong>Verified By:</strong> <% if (report.verifiedBy.length > 0) { %>
-        <% report.verifiedBy.forEach(user => { %> <%= user.name %><br />
-        <% }) %> <% } else { %> Not verified yet. <% } %>
-      </p>
+
+      <a href="/auth/home">Home</a>
+      <!-- <a href="/auth/logout">Log out</a> -->
+
+      <div id="reportsContainer">
+        <h2>All reports</h2>
+        <% if(reports.length > 0) { %> <% reports.forEach(report => { %>
+        <div class="tip-card">
+          <h3><%= report.title %></h3>
+          <p><%= report.content %></p>
+          <p><strong>Posted by:</strong> <%= report.postedBy.name %></p>
+          <p>
+            <small
+              >Posted on: <%= new Date(report.createdOn).toLocaleString()
+              %></small
+            >
+          </p>
+          <p>Status: <%= report.status %></p>
+          <p>
+            <strong>Verified By:</strong> <% if (report.verifiedBy.length > 0) {
+            %> <% report.verifiedBy.forEach(user => { %> <%= user.name %><br />
+            <% }) %> <% } else { %> Not verified yet. <% } %>
+          </p>
+          <% if (user && user.role != "user") {%>
+          <div class="action-buttons">
+            <form action="/reports/<%= report._id %>/verify" method="POST">
+              <button type="submit">Verify</button>
+            </form>
+            <form
+              action="/reports/<%= report._id %>/delete"
+              method="POST"
+              onsubmit="return confirm('Are you sure?');"
+            >
+              <button type="submit">❌ Delete</button>
+            </form>
+          </div>
+          <% } %>
+        </div>
+        <% }); %> <% } else { %>
+        <p>No Reports available.</p>
+        <% } %>
+      </div>
     </div>
-    <% }); %> <% } else { %>
-    <p>No tips available.</p>
-    <% } %>
   </body>
 </html>

@@ -19,6 +19,8 @@
     <% } %>
     <a href="/auth/verify-user-details">Already a Advisor</a>
     <a href="/auth/profile-page">Profile Page</a>
+    <%}%> <% if(user.role === "admin") {%>
+    <a href="/admin/">Display all profiles</a>
     <%}%>
   </body>
 </html>
