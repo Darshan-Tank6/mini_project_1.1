@@ -138,19 +138,19 @@ connectDB();
 
 // 📌 Security Middlewares
 // app.use(helmet()); // Secure HTTP headers
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'", "https://fonts.googleapis.com"],
-        fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      },
-    },
-  })
-);
-app.use(compression()); // Gzip compression for performance
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         defaultSrc: ["'self'"],
+//         scriptSrc: ["'self'"],
+//         styleSrc: ["'self'", "https://fonts.googleapis.com"],
+//         fontSrc: ["'self'", "https://fonts.gstatic.com"],
+//       },
+//     },
+//   })
+// );
+//app.use(compression()); // Gzip compression for performance
 
 // 📌 Rate Limiting (Prevents brute force attacks)
 const limiter = rateLimit({

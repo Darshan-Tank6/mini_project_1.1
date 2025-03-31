@@ -95,6 +95,7 @@
     <a href="/auth/home">Back to Dashboard</a>
   </body>
 </html> -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -102,19 +103,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <link rel="stylesheet" href="/profile-page.css" />
+    <script src="/profile-page-script.js"></script>
   </head>
   <body>
-    <!-- Navigation -->
-    <!-- <nav class="navbar">
-      <h1>Stock Market Platform</h1>
-      <ul>
-        <li><a href="/auth/home">Dashboard</a></li>
-        <li><a href="#reset-password-modal">Reset Password</a></li>
-        <li><a href="#reset-pin-modal">Reset PIN</a></li>
-        <li><a href="#delete-profile-modal">Delete Profile</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
-      </ul>
-    </nav> -->
     <nav class="navbar">
       <h1>Stock Market Platform</h1>
       <ul>
@@ -125,7 +116,6 @@
         <li><a href="/auth/logout">Logout</a></li>
       </ul>
     </nav>
-    <!-- Tabs Section -->
     <div class="tabs">
       <input type="radio" name="tab" id="tab1" checked />
       <label for="tab1">Profile</label>
@@ -168,10 +158,31 @@
         <p>No Tips submitted.</p>
         <% } %>
       </div>
+
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li>
+              <button id="open-reset-password" class="sidebar-button">
+                Reset Password
+              </button>
+            </li>
+            <li>
+              <button id="open-reset-pin" class="sidebar-button">
+                Reset PIN
+              </button>
+            </li>
+            <li>
+              <button id="open-delete-profile" class="sidebar-button">
+                Delete Profile
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </aside>
     </div>
 
-    <!-- CSS-Only Modals -->
-    <div id="reset-password-modal" class="modal">
+    <div id="reset-password-modal" class="modal hidden">
       <div class="modal-content">
         <h3>Reset Password</h3>
         <form action="/auth/reset-password" method="post">
@@ -189,11 +200,11 @@
           />
           <button type="submit">Change Password</button>
         </form>
-        <a href="#" class="close">Close</a>
+        <a data-modal="reset-password-modal" class="close-modal">Close</a>
       </div>
     </div>
 
-    <div id="reset-pin-modal" class="modal">
+    <div id="reset-pin-modal" class="modal hidden">
       <div class="modal-content">
         <h3>Reset PIN</h3>
         <form action="/auth/reset-pin" method="post">
@@ -206,11 +217,11 @@
           <input type="password" name="newPin" placeholder="New PIN" required />
           <button type="submit">Change PIN</button>
         </form>
-        <a href="#" class="close">Close</a>
+        <a data-modal="reset-pin-modal" class="close-modal">Close</a>
       </div>
     </div>
 
-    <div id="delete-profile-modal" class="modal">
+    <div id="delete-profile-modal" class="modal hidden">
       <div class="modal-content">
         <h3>Delete Profile</h3>
         <form action="/auth/delete/self/<%= user._id %>" method="post">
@@ -224,7 +235,7 @@
             Delete Profile
           </button>
         </form>
-        <a href="#" class="close">Close</a>
+        <a data-modal="delete-profile-modal" class="close-modal">Close</a>
       </div>
     </div>
   </body>
