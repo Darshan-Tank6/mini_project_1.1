@@ -1,0 +1,84 @@
+/* Wrapper */
+.form-wrapper {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Unified Form Styling */
+.modern-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modern-form h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+}
+
+.modern-form input,
+.modern-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.modern-form input:focus,
+.modern-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.modern-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.modern-form button {
+  background: linear-gradient(to right, #007bff, #0056b3);
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.modern-form button:hover {
+  background: linear-gradient(to right, #0056b3, #004080);
+  transform: translateY(-2px);
+}
+.card {
+  background: #ffffff;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+  font-size: 20px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 5px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.card small {
+  color: #888;
+}

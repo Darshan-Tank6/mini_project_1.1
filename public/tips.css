@@ -58,21 +58,21 @@ h2 {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-#tip-form {
+#formbox {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-#tip-form h2 {
+#formbox h2 {
   margin-bottom: 10px;
   font-size: 24px;
   color: #333;
   text-align: center;
 }
 
-#tip-form input,
-#tip-form textarea {
+#formbox input,
+#formbox textarea {
   width: 95%;
   padding: 12px 15px;
   font-size: 16px;
@@ -82,19 +82,19 @@ h2 {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-#tip-form input:focus,
-#tip-form textarea:focus {
+#formbox input:focus,
+#formbox textarea:focus {
   border-color: #28a745;
   box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
   outline: none;
 }
 
-#tip-form textarea {
+#formbox textarea {
   min-height: 150px;
   resize: vertical;
 }
 
-#tip-form button {
+#formbox button {
   background: linear-gradient(to right, #28a745, #218838);
   color: #fff;
   padding: 12px;
@@ -105,13 +105,13 @@ h2 {
   transition: background 0.3s, transform 0.2s;
 }
 
-#tip-form button:hover {
+#formbox button:hover {
   background: linear-gradient(to right, #218838, #1e7e34);
   transform: translateY(-2px);
 }
 
 /* Tip Cards */
-.tip-card {
+.details-card {
   background: #ffffff;
   padding: 15px;
   margin-bottom: 20px;
@@ -120,16 +120,16 @@ h2 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.tip-card h3 {
+.details-card h3 {
   margin-top: 0;
 }
 
-.tip-card form {
+.details-card form {
   display: inline-block;
   margin-right: 10px;
 }
 
-.tip-card .delete {
+.details-card .delete {
   background-color: #dc3545;
   color: white;
   border: none;
@@ -138,7 +138,7 @@ h2 {
   cursor: pointer;
 }
 
-.tip-card .delete:hover {
+.details-card .delete:hover {
   background-color: #c82333;
 }
 
@@ -146,10 +146,11 @@ h2 {
   color: white;
   border-radius: 4px;
   border: none;
-  padding: 10px;
+  padding: 11px;
 }
 
-.upvote {
+.upvote,
+.verify {
   background-color: green;
 }
 
@@ -157,7 +158,8 @@ h2 {
   background-color: #dc3545;
 }
 
-.upvote:hover {
+.upvote:hover,
+.verify:hover {
   background-color: #00cc99;
 }
 

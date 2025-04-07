@@ -8,18 +8,19 @@
     <script defer src="/profile-page-script.js"></script>
     <link rel="stylesheet" href="/footer.css" />
     <link rel="stylesheet" href="/modal.css" />
+    <link rel="stylesheet" href="/nav.css" />
   </head>
   <body>
     <nav class="navbar">
-      <div class="navbar-brand">InvestRight</div>
-      <ul class="nav-links">
+      <h4>InvestRight</h4>
+      <ul class="nav-list">
         <% if(user.role === 'admin') { %>
         <li><a href="/admin/">All profiles</a></li>
         <% } %>
         <!-- <li><a href="/auth/home">Dashboard</a></li> -->
         <li><a href="/tips">Tips</a></li>
         <li><a href="/reports">Report Fraud</a></li>
-        <li><a href="/auth/profile-page" class="active">Profile</a></li>
+        <li><a href="/auth/profile-page">Profile</a></li>
         <li><a href="/auth/logout">Logout</a></li>
       </ul>
     </nav>
@@ -245,16 +246,13 @@
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-left">
-          <h3>StockSmart</h3>
-          <p>&copy; 2025 StockSmart. All rights reserved.</p>
+          <h3>InvestRight</h3>
+          <p>&copy; 2025 InvestRight. All rights reserved.</p>
         </div>
         <div class="footer-right">
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
         </div>
-      </div>
     </footer>
   </body>
 </html>

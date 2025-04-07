@@ -30,7 +30,7 @@
       </center>
       <!-- <% if(user && user.role != "user"){%> -->
       <div id="admin-form">
-        <form id="tip-form" action="/tips/add" method="POST">
+        <form id="formbox" action="/tips/add" method="POST">
           <input
             name="title"
             type="text"
@@ -55,7 +55,7 @@
       <h2>All Tips</h2>
       <div id="tips-container">
         <% if (tips.length > 0) { %> <% tips.forEach(tip => { %>
-        <div class="tip-card">
+        <div class="details-card">
           <h3><%= tip.title %></h3>
           <p><%= tip.content %></p>
           <p><strong>Posted by:</strong> <%= tip.postedBy.name %></p>
@@ -92,14 +92,12 @@
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-left">
-          <h3>StockSmart</h3>
-          <p>&copy; 2025 StockSmart. All rights reserved.</p>
+          <h3>InvestRight</h3>
+          <p>&copy; 2025 InvestRight. All rights reserved.</p>
         </div>
         <div class="footer-right">
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
         </div>
       </div>
     </footer>

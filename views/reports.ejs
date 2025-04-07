@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Reports - MarketTips</title>
-    <link rel="stylesheet" href="/report.css" />
+    <link rel="stylesheet" href="/tips.css" />
+    <!-- <link rel="stylesheet" href="/report.css" /> -->
     <link rel="stylesheet" type="text/css" href="/nav.css" />
     <link rel="stylesheet" href="/footer.css" />
   </head>
@@ -30,21 +31,28 @@
       <h1>Stock Market Reports</h1>
 
       <!-- Report Form -->
-      <form class="report-form" action="/reports/add" method="POST">
-        <input type="text" name="title" placeholder="Report Title" required />
-        <textarea
-          name="content"
-          placeholder="Write about scam/fraud here..."
-          required
-        ></textarea>
-        <button type="submit">Submit Report</button>
-      </form>
+      <div id="admin-form">
+        <form
+          id="formbox"
+          class="report-form"
+          action="/reports/add"
+          method="POST"
+        >
+          <input type="text" name="title" placeholder="Report Title" required />
+          <textarea
+            name="content"
+            placeholder="Write about scam/fraud here..."
+            required
+          ></textarea>
+          <button type="submit">Submit Report</button>
+        </form>
+      </div>
 
       <!-- Reports List -->
       <div id="reportsContainer">
         <h2>All Reports</h2>
         <% if (reports.length > 0) { %> <% reports.forEach(report => { %>
-        <div class="report-card">
+        <div class="details-card">
           <h3><%= report.title %></h3>
           <p><%= report.content %></p>
           <p><strong>Posted by:</strong> <%= report.postedBy.name %></p>
@@ -64,14 +72,14 @@
           <% if (user && user.role != "user") { %>
           <div class="action-buttons">
             <form action="/reports/<%= report._id %>/verify" method="POST">
-              <button type="submit">Verify</button>
+              <button class="btn verify" type="submit">Verify</button>
             </form>
             <form
               action="/reports/<%= report._id %>/delete"
               method="POST"
               onsubmit="return confirm('Are you sure?');"
             >
-              <button type="submit">❌ Delete</button>
+              <button class="delete" type="submit">❌ Delete</button>
             </form>
           </div>
           <% } %>
@@ -84,14 +92,12 @@
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-left">
-          <h3>StockSmart</h3>
-          <p>&copy; 2025 StockSmart. All rights reserved.</p>
+          <h3>InvestRight</h3>
+          <p>&copy; 2025 InvestRight. All rights reserved.</p>
         </div>
         <div class="footer-right">
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
         </div>
       </div>
     </footer>

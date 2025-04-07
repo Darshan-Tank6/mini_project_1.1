@@ -146,10 +146,13 @@ img {
   justify-content: space-between;
   align-items: center;
   color: black;
+  /* border-width: 2px; */
+  /* border-bottom: 2px solid #00cc99; */
 }
 
 .navbar h4 {
   margin: 0;
+  /* color: #00cc99; */
 }
 
 .nav-list {
@@ -160,11 +163,13 @@ img {
 }
 
 .nav-list li a {
-  color: black;
+  padding: 10px;
+  border-radius: 4px;
+  color: #111;
   text-decoration: none;
   font-weight: bold;
 }
 
 .nav-list li a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
