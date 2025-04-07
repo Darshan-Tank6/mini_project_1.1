@@ -150,16 +150,17 @@ connectDB();
 //     },
 //   })
 // );
-//app.use(compression()); // Gzip compression for performance
+
+app.use(compression()); // Gzip compression for performance
 
 // 📌 Rate Limiting (Prevents brute force attacks)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per window
+  max: 300, // Limit each IP to 100 requests per window
   message: "Too many requests from this IP, please try again later.",
 });
 
-//app.use(limiter);
+app.use(limiter);
 
 // 📌 Session Setup (With Secure Cookie)
 app.use(
@@ -180,6 +181,8 @@ app.use(
 // 📌 Initialize Passport.js
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json()); // for JSON POST bodies
+app.use(express.urlencoded({ extended: false })); // for form POST bodies
 
 // 📌 Middleware
 app.use(bodyParser.urlencoded({ extended: false }));

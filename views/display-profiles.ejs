@@ -26,27 +26,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Profiles</title>
     <link rel="stylesheet" href="/display-profiles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <script defer src="/profile-page-script.js"></script>
+    <link rel="stylesheet" href="/modal.css" />
   </head>
   <body>
-    <h1>All User Profiles</h1>
-    <ul>
-      <% if(users.length > 0 ){ %> <% users.forEach(user => { %>
-      <li>
-        <div>
-          <strong>User:</strong> <%= user.name %> <br />
-          <strong>Email:</strong> <%= user.email %>
-        </div>
-        <div class="buttons">
-          <a href="/admin/delete/<%= user._id %>" class="delete-btn">Delete</a>
-          <a href="/admin/update-profile/<%= user._id%>" class="update-btn"
-            >Update</a
-          >
-        </div>
-      </li>
-      <% }); %> <% } else { %>
-      <p>No users found.</p>
-      <% } %>
-    </ul>
-    <a href="/auth/home" class="home-link">Home</a>
+    <nav class="navbar">
+      <h4>InvestRight</h4>
+      <ul class="nav-list">
+        <% if(user.role === 'admin') { %>
+        <li><a href="/admin/">All profiles</a></li>
+        <% } %>
+        <!-- <li><a href="/auth/home">Dashboard</a></li> -->
+        <li><a href="/tips">Tips</a></li>
+        <li><a href="/reports">Report Fraud</a></li>
+        <li><a href="/auth/profile-page">Profile</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+      </ul>
+    </nav>
+
+    <!-- <div class="container">
+      <h1>All User Profiles</h1>
+      <ul>
+        <% if(users.length > 0 ){ %> <% users.forEach(user => { %>
+        <li>
+          <div>
+            <strong>User:</strong> <%= user.name %> <br />
+            <strong>Email:</strong> <%= user.email %> <br />
+            <strong>Role: </strong> <%= user.role %> <br />
+          </div>
+          <div class="buttons">
+            <a href="/admin/delete/<%= user._id %>" class="delete-btn"
+              >Delete</a
+            >
+            <button
+              class="btn open-update-modal"
+              data-id="<%= user._id %>"
+              data-name="<%= user.name %>"
+              data-email="<%= user.email %>"
+              data-role="<%= user.role %>"
+              data-regno="<%= user.regNO || '' %>"
+              data-contactperson="<%= user.contactPerson || '' %>"
+              data-location="<%= user.location || '' %>"
+            >
+              Update
+            </button>
+          </div>
+        </li>
+        <% }); %> <% } else { %>
+        <p>No users found.</p>
+        <% } %>
+      </ul>
+    </div> -->
+    <!-- <a href="/auth/home" class="home-link">Home</a> -->
+
+    <!-- <div id="update-profile-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Update Profile</h3>
+        <form action="/admin/update-profile" method="post">
+          <input type="hidden" name="id" id="update-id" />
+
+          <input type="text" name="name" id="update-name" placeholder="name" />
+          <select name="role" id="update-role">
+            <option value="admin">Admin</option>
+            <option value="advisor">Advisor</option>
+            <option value="user">User</option>
+          </select>
+
+          <div id="advisor-fields" class="hidden">
+            <input
+              type="text"
+              name="regNO"
+              id="update-regno"
+              placeholder="reg no"
+            />
+            <input
+              type="text"
+              name="contactPerson"
+              id="update-contact"
+              placeholder="contact person"
+            />
+            <input
+              type="text"
+              name="location"
+              id="update-location"
+              placeholder="location"
+            />
+          </div>
+
+          <button type="submit">Update</button>
+        </form>
+        <span class="close-modal" data-close="update-profile-modal">✖</span>
+      </div>
+    </div> -->
+  
+    <div class="container">
+      <h1>All User Profiles</h1>
+      <ul>
+        <% if (users.length > 0) { %>
+          <% users.forEach(user => { %>
+            <li>
+              <div>
+                <strong>User:</strong> <%= user.name %> <br />
+                <strong>Email:</strong> <%= user.email %> <br />
+                <strong>Role:</strong> <%= user.role %> <br />
+              </div>
+              <div class="buttons">
+                <a href="/admin/delete/<%= user._id %>" class="delete-btn">Delete</a>
+                <button class="btn" onclick="openModal('<%= user._id %>')">Update</button>
+              </div>
+            </li>
+    
+            <!-- Unique modal per user -->
+            <div id="modal-<%= user._id %>" class="modal hidden">
+              <div class="modal-content">
+                <h3>Update Profile</h3>
+                <form action="/admin/update-profile" method="post">
+                  <input type="hidden" name="id" value="<%= user._id %>" />
+                  <div class="input-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" value="<%= user.name %>" placeholder="name" />
+                  </div>
+
+                  <div class="input-group">
+                    <label for="role">Role:</label>
+                    <select name="role">
+                      <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin</option>
+                      <option value="advisor" <%= user.role === 'advisor' ? 'selected' : '' %>>Advisor</option>
+                      <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>User</option>
+                    </select>
+                  </div>
+    
+                  <% if(user.role === 'advisor') { %>
+                    <div class="input-group">
+                      <label for="regNo">Registration No:</label>
+                      <input type="text" name="regNO" placeholder="reg no" value="<%= user.regNO %>" />
+                    </div>
+                    <div class="input-group">
+                      <label for="contactPerson">Contact Person:</label>
+                      <input type="text" name="contactPerson" placeholder="contact person" value="<%= user.contactPerson %>" />
+                    </div>
+                    <div class="input-group">
+                      <label for="location">Location:</label>
+                      <input type="text" name="location" placeholder="location" value="<%= user.location %>" />
+                    </div>
+                  <% } %>
+    
+                  <button type="submit">Update</button>
+                </form>
+                <span class="close-modal" onclick="closeModal('<%= user._id %>')">✖</span>
+              </div>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <p>No users found.</p>
+        <% } %>
+      </ul>
+    </div>
+    
   </body>
 </html>

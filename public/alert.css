@@ -1,0 +1,39 @@
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  background-color: #f44336; /* Red */
+  color: white;
+  padding: 15px 20px;
+  border-left: 6px solid #d32f2f;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: slideDownFade 0.5s ease forwards, fadeOut 0.5s ease 4.5s forwards;
+  min-width: 300px;
+  max-width: 500px;
+  text-align: center;
+  opacity: 1;
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}

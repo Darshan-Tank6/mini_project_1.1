@@ -475,7 +475,7 @@ router.post("/verify-user-details", async (req, res) => {
 });
 
 // Login Route - Step 1 (Password Verification)
-router.post("/login", (req, res, next) => {
+router.post("/login1", (req, res, next) => {
   passport.authenticate("local", async (err, user, info) => {
     if (err) return next(err);
     if (!user) {
@@ -490,16 +490,16 @@ router.post("/login", (req, res, next) => {
 });
 
 // Render PIN Verification Page
-router.get("/verify-pin", (req, res) => {
-  if (!req.session.tempUserId) {
-    req.flash("error_msg", "Unauthorized access.");
-    return res.redirect("/auth/login");
-  }
-  res.render("verify-pin");
-});
+// router.get("/verify-pin", (req, res) => {
+//   if (!req.session.tempUserId) {
+//     req.flash("error_msg", "Unauthorized access.");
+//     return res.redirect("/auth/login");
+//   }
+//   res.render("verify-pin");
+// });
 
 // Handle PIN Verification
-router.post("/verify-pin", async (req, res) => {
+router.post("/verify-pin1", async (req, res) => {
   try {
     const { securityPin } = req.body;
     const user = await User.findById(req.session.tempUserId);
@@ -520,6 +520,49 @@ router.post("/verify-pin", async (req, res) => {
     console.error(err);
     req.flash("error_msg", "Error verifying PIN.");
     res.redirect("/auth/verify-pin");
+  }
+});
+
+// LOGIN (Step 1)
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", async (err, user, info) => {
+    if (err)
+      return res.status(500).json({ success: false, message: "Server error" });
+    if (!user)
+      return res.status(401).json({ success: false, message: info.message });
+
+    req.session.tempUserId = user._id;
+    return res
+      .status(200)
+      .json({ success: true, message: "Password verified" });
+  })(req, res, next);
+});
+
+// VERIFY PIN (Step 2)
+router.post("/verify-pin", async (req, res) => {
+  try {
+    const { securityPin } = req.body;
+    const user = await User.findById(req.session.tempUserId);
+
+    if (!user || !(await user.compareSecurityPin(securityPin))) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid security PIN." });
+    }
+
+    req.login(user, (err) => {
+      if (err)
+        return res
+          .status(500)
+          .json({ success: false, message: "Login failed" });
+      delete req.session.tempUserId;
+      return res
+        .status(200)
+        .json({ success: true, message: "Login successful" });
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 });
 

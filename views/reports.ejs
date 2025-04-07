@@ -7,31 +7,32 @@
     <title>Reports - MarketTips</title>
     <link rel="stylesheet" href="/report.css" />
     <link rel="stylesheet" type="text/css" href="/nav.css" />
+    <link rel="stylesheet" href="/footer.css" />
   </head>
   <body>
     <!-- Navigation -->
     <nav class="navbar">
-      <h1>Stock Market Platform</h1>
-      <ul>
-        <li><a href="/auth/home">Dashboard</a></li>
+      <h4>InvestRight</h4>
+      <ul class="nav-list">
+        <% if(user.role === 'admin') { %>
+        <li><a href="/admin/">All profiles</a></li>
+        <% } %>
+        <!-- <li><a href="/auth/home">Dashboard</a></li> -->
         <li><a href="/tips">Tips</a></li>
         <li><a href="/reports">Report Fraud</a></li>
         <li><a href="/auth/profile-page">Profile</a></li>
         <li><a href="/auth/logout">Logout</a></li>
       </ul>
     </nav>
+
+    <!-- Main Container -->
     <div class="container">
-      <h1>Stock market reports</h1>
-      <form action="/reports/add" method="POST">
-        <input
-          type="text"
-          id="reportTitle"
-          name="title"
-          placeholder="Report Title"
-          required
-        />
+      <h1>Stock Market Reports</h1>
+
+      <!-- Report Form -->
+      <form class="report-form" action="/reports/add" method="POST">
+        <input type="text" name="title" placeholder="Report Title" required />
         <textarea
-          id="reportContent"
           name="content"
           placeholder="Write about scam/fraud here..."
           required
@@ -39,13 +40,11 @@
         <button type="submit">Submit Report</button>
       </form>
 
-      <!-- <a href="/auth/home">Home</a>
-        <a href="/auth/logout">Log out</a> -->
-
+      <!-- Reports List -->
       <div id="reportsContainer">
-        <h2>All reports</h2>
-        <% if(reports.length > 0) { %> <% reports.forEach(report => { %>
-        <div class="tip-card">
+        <h2>All Reports</h2>
+        <% if (reports.length > 0) { %> <% reports.forEach(report => { %>
+        <div class="report-card">
           <h3><%= report.title %></h3>
           <p><%= report.content %></p>
           <p><strong>Posted by:</strong> <%= report.postedBy.name %></p>
@@ -57,11 +56,12 @@
           </p>
           <p>Status: <%= report.status %></p>
           <p>
-            <strong>Verified By:</strong> <% if (report.verifiedBy.length > 0) {
-            %> <% report.verifiedBy.forEach(user => { %> <%= user.name %><br />
+            <strong>Verified By:</strong>
+            <% if (report.verifiedBy.length > 0) { %> <%
+            report.verifiedBy.forEach(user => { %> <%= user.name %><br />
             <% }) %> <% } else { %> Not verified yet. <% } %>
           </p>
-          <% if (user && user.role != "user") {%>
+          <% if (user && user.role != "user") { %>
           <div class="action-buttons">
             <form action="/reports/<%= report._id %>/verify" method="POST">
               <button type="submit">Verify</button>
@@ -81,5 +81,19 @@
         <% } %>
       </div>
     </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <h3>StockSmart</h3>
+          <p>&copy; 2025 StockSmart. All rights reserved.</p>
+        </div>
+        <div class="footer-right">
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

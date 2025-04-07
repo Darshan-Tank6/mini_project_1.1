@@ -1,0 +1,247 @@
+/* ====== General Body with Background Image ====== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("Background-PNG-HD-Isolated.png") no-repeat center center
+    fixed;
+  background-size: cover;
+  color: #333;
+}
+
+/* ====== Container ====== */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: rgba(
+    236,
+    240,
+    193,
+    0.9
+  ); /* Slight transparency for readability */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Header ====== */
+h1,
+h2 {
+  color: #090909;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* ====== Form ====== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Input & Textarea - Rectangle Shape */
+input,
+textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 17px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+}
+
+/* Submit Button */
+button {
+  /* ====== General Body with Background Image ====== */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url("Background-PNG-HD-Isolated.png") no-repeat center center
+      fixed;
+    background-size: cover;
+    color: #333;
+  }
+
+  /* ====== Container ====== */
+  .container {
+    max-width: 800px;
+    margin: 60px auto;
+    background: #ffffff; /* White Background */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+  }
+
+  /* ====== Header ====== */
+  h1,
+  h2 {
+    color: #090909;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  /* ====== Form ====== */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  /* Input & Textarea - Rectangle Shape */
+  input,
+  textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 17px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+  }
+
+  /* Submit Button */
+  button {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #4153f2;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.2s;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  /* ====== Tip Card ====== */
+  .tip-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Tip Title */
+  .tip-card h3 {
+    margin: 0;
+    color: #007bff;
+    font-size: 18px;
+  }
+
+  /* Tip Content */
+  .tip-card p {
+    margin: 5px 0;
+  }
+
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  /* ====== Home Button (Outside the Container) ====== */
+  .home-btn {
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background: #28a745;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background 0.2s;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .home-btn:hover {
+    background: #218838;
+  }
+
+  /* ====== Mobile Responsiveness ====== */
+  @media (max-width: 768px) {
+    .container {
+      margin: 20px;
+      padding: 15px;
+    }
+
+    .home-btn {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  }
+
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #4153f2;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* ====== Report Card ====== */
+.tip-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Report Title */
+.tip-card h3 {
+  margin: 0;
+  color: #007bff;
+  font-size: 18px;
+}
+
+/* Report Content */
+.tip-card p {
+  margin: 5px 0;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Home Button */
+.home-btn {
+  display: inline-block;
+  margin: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background: #28a745;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background 0.2s;
+  font-weight: bold;
+}
+
+.home-btn:hover {
+  background: #218838;
+}

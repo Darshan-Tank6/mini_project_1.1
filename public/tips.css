@@ -1,90 +1,166 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #ffffff;
-  background: url("Background-PNG-HD-Isolated.png") no-repeat;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
 }
 
 h1,
 h2 {
-  text-align: center;
-  font-size: 40px;
+  color: #222;
 }
 
-form {
-  max-width: 600px;
-  height: 200px;
-  margin: 50px auto;
-  padding: 15px;
-  background: rgb(255, 255, 255);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+/* Tip Form */
+/* #admin-form {
+  background: #ffffff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
-input,
-textarea,
-button {
-  width: 90%;
-  padding: 15px;
-  margin: 5px 0;
+#tip-form input,
+#tip-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  align-items: center;
+  border-radius: 4px;
 }
 
-button {
-  background-color: #007bff;
+#tip-form button {
+  background-color: #28a745;
   color: white;
-  border: darkgrey;
+  border: none;
+  padding: 10px 20px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-button:hover {
-  background-color: #0056b3;
+#tip-form button:hover {
+  background-color: #218838;
+} */
+
+/* Tip Form */
+#admin-form {
+  background: #f9f9f9;
+  padding: 30px;
+  width: 600px;
+  max-width: 900px;
+  margin: 0 auto 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+#tip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#tip-form h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+#tip-form input,
+#tip-form textarea {
+  width: 95%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#tip-form input:focus,
+#tip-form textarea:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+  outline: none;
+}
+
+#tip-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+#tip-form button {
+  background: linear-gradient(to right, #28a745, #218838);
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#tip-form button:hover {
+  background: linear-gradient(to right, #218838, #1e7e34);
+  transform: translateY(-2px);
+}
+
+/* Tip Cards */
 .tip-card {
-  max-width: 600px;
-  margin: 25px auto;
+  background: #ffffff;
   padding: 15px;
-  background: white;
-  border-left: 5px solid #007bff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  margin-bottom: 20px;
+  border-left: 5px solid #00cc99;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .tip-card h3 {
-  margin: 0;
-  color: #333;
-}
-
-.tip-card p {
-  margin: 5px 0;
+  margin-top: 0;
 }
 
 .tip-card form {
-  max-width: none;
-  height: 30px;
-  margin-top: 10px;
-  padding: 0;
-  background: rgb(255, 255, 255);
-  box-shadow: none;
-  border-radius: none;
+  display: inline-block;
+  margin-right: 10px;
 }
 
-button.vote {
-  background-color: #28a745;
+.tip-card .delete {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-button.vote:hover {
-  background-color: #218838;
+.tip-card .delete:hover {
+  background-color: #c82333;
 }
 
-button.delete {
+.btn {
+  color: white;
+  border-radius: 4px;
+  border: none;
+  padding: 10px;
+}
+
+.upvote {
+  background-color: green;
+}
+
+.downvote {
   background-color: #dc3545;
 }
 
-button.delete:hover {
+.upvote:hover {
+  background-color: #00cc99;
+}
+
+.downvote:hover {
   background-color: #c82333;
 }

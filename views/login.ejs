@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="/login.css" />
+    <link rel="stylesheet" href="/alert.css" />
+    <script src="/profile-page-script.js"></script>
+    <link rel="stylesheet" href="/modal.css" />
   </head>
   <body>
-    <div class="login-container">
-      <h2>Login</h2>
-      <form action="/auth/login" method="post" id="loginForm">
+    <% if (error_msg && error_msg.length > 0) { %>
+    <div class="custom-alert"><%= error_msg %></div>
+    <% } %>
+
+    <div class="container">
+      <h2>Welcome Back To InvestRight</h2>
+      <form id="loginForm">
         <input
-          id="name"
+          id="email"
           type="text"
           name="email"
-          placeholder="email"
+          placeholder="Email"
           required
         />
         <input
           id="password"
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
           required
         />
         <button type="submit">Login</button>
@@ -30,5 +37,79 @@
         Don't have an account? <a href="/auth/register">Register</a>
       </p>
     </div>
+
+    <div id="verify-pin-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Enter Security PIN</h3>
+        <form id="pinForm">
+          <label for="securityPin">Security PIN:</label>
+          <input type="password" id="securityPin" name="securityPin" required />
+          <button type="submit">Verify PIN</button>
+        </form>
+        <span class="close-modal" id="closeModal">✖</span>
+      </div>
+    </div>
+
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const pinForm = document.getElementById("pinForm");
+      const modal = document.getElementById("verify-pin-modal");
+      const closeModal = document.getElementById("closeModal");
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        loginForm.querySelector("button").disabled = true;
+
+        const email = loginForm.email.value;
+        const password = loginForm.password.value;
+
+        try {
+          const res = await fetch("/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const result = await res.json();
+          if (result.success) {
+            modal.classList.remove("hidden");
+          } else {
+            alert(result.message || "Invalid email or password");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Login failed.");
+        }
+      });
+
+      pinForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const securityPin = pinForm.securityPin.value;
+
+        try {
+          const res = await fetch("/auth/verify-pin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ securityPin }),
+          });
+
+          const result = await res.json();
+          if (result.success) {
+            window.location.href = "/auth/profile-page";
+          } else {
+            alert(result.message || "Invalid security PIN");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("PIN verification failed.");
+        }
+      });
+
+      closeModal.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        pinForm.reset();
+      });
+    </script>
   </body>
 </html>

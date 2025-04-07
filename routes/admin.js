@@ -31,12 +31,12 @@ router.get(
 );
 
 router.post(
-  "/update-profile/:id",
+  "/update-profile",
   ensureAuthenticated,
   checkRole(["admin"]),
   async (req, res) => {
-    const { name, contactPerson, location, regNo } = req.body;
-    const user = await User.findById(req.params.id);
+    const { id, name, contactPerson, location, regNo } = req.body;
+    const user = await User.findById(id);
     if (name) {
       user.name = name;
     }
