@@ -29,10 +29,24 @@
     <link rel="stylesheet" href="/nav.css" />
     <script defer src="/profile-page-script.js"></script>
     <link rel="stylesheet" href="/modal.css" />
-    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/footer.css" />
+    <link rel="stylesheet" href="alert.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&" />
   </head>
   <body>
     <nav class="navbar">
+      <% if (success_msg && success_msg.length > 0) { %>
+        <div class="custom-alert-scuuess"><%= success_msg %></div>
+        <% } %>
+  
+      <% if(error_msg && error_msg.length >0) { %>
+        <div class="custom-alert"><%= error_msg %></div>
+        <%}%>
+  
+      <% if(error && error.length > 0) { %>
+        <div class="custom-alert"><%= error_msg %></div>
+        <% }%>
+
       <h4>InvestRight</h4>
       <ul class="nav-list">
         <% if(user.role === 'admin') { %>
@@ -41,8 +55,12 @@
         <!-- <li><a href="/auth/home">Dashboard</a></li> -->
         <li><a href="/tips">Tips</a></li>
         <li><a href="/reports">Report Fraud</a></li>
-        <li><a href="/auth/profile-page">Profile</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
+        <li><a href="/auth/profile-page">
+          <span class="material-symbols-outlined">
+          account_circle
+          </span>
+        </a></li>
+        <!-- <li><a href="/auth/logout">Logout</a></li> -->
       </ul>
     </nav>
 
@@ -194,8 +212,8 @@
         <div class="footer-right">
           <a href="/about.html">About</a>
           <a href="/contact.html">Contact</a>
+          <a href="/index.html">Home</a>
         </div>
-      </div>
     </footer>
     
   </body>

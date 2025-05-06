@@ -138,20 +138,20 @@ userSchema.methods.compareSecurityPin = function (enteredPin) {
 };
 
 // 📌 Role-based validation before saving
-userSchema.pre("validate", function (next) {
-  if (this.role === "user" || this.role === "admin") {
-    this.regNo = null;
-    this.contactPerson = null;
-    this.location = null;
-  } else if (this.role === "advisor") {
-    if (!this.regNo || !this.contactPerson || !this.location) {
-      return next(
-        new Error("Advisors must have regNo, contactPerson, and location")
-      );
-    }
-  }
-  next();
-});
+// userSchema.pre("validate", function (next) {
+//   if (this.role === "user" || this.role === "admin") {
+//     this.regNo = null;
+//     this.contactPerson = null;
+//     this.location = null;
+//   } else if (this.role === "advisor") {
+//     if (!this.regNo || !this.contactPerson || !this.location) {
+//       return next(
+//         new Error("Advisors must have regNo, contactPerson, and location")
+//       );
+//     }
+//   }
+//   next();
+// });
 
 // 🔹 Generate Reset Token (For Password & PIN)
 userSchema.methods.generateResetToken = function (type) {

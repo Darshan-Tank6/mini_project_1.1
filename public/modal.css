@@ -45,7 +45,7 @@
 
 .modal input {
   height: auto;
-  width: 100%;
+  width: 95%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -55,7 +55,7 @@
   padding: 10px;
   width: 100%;
   color: white;
-  background-color: #007bff;
+  background-color: #00cc99;
   outline: none;
   border: none;
   border-radius: 5px;
@@ -63,5 +63,5 @@
 }
 
 .modal button:hover {
-  background-color: #0056b3;
+  background-color: #00997a;
 }

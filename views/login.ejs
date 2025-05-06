@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="/modal.css" />
   </head>
   <body>
-    <% if (error_msg && error_msg.length > 0) { %>
+    <% if (success_msg && success_msg.length > 0) { %>
+    <div class="custom-alert-success"><%= success_msg %></div>
+    <% } %> <% if(error_msg && error_msg.length >0) { %>
     <div class="custom-alert"><%= error_msg %></div>
-    <% } %>
+    <%}%> <% if(error && error.length > 0) { %>
+    <div class="custom-alert"><%= error_msg %></div>
+    <% }%>
 
     <div class="container">
       <h2>Welcome Back To InvestRight</h2>

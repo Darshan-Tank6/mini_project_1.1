@@ -151,7 +151,7 @@ h2 {
 
 .upvote,
 .verify {
-  background-color: green;
+  background-color: #00cc99;
 }
 
 .downvote {
@@ -160,7 +160,7 @@ h2 {
 
 .upvote:hover,
 .verify:hover {
-  background-color: #00cc99;
+  background-color: #00997a;
 }
 
 .downvote:hover {

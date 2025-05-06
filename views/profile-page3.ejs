@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile - MarketTips</title>
     <link rel="stylesheet" href="/profile.css" />
-    <link rel="stylesheet" href="/alert.css" />
-
     <script defer src="/profile-page-script.js"></script>
     <link rel="stylesheet" href="/footer.css" />
     <link rel="stylesheet" href="/modal.css" />
@@ -14,18 +12,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&" />
   </head>
   <body>
-    <% if (success_msg && success_msg.length > 0) { %>
-      <div class="custom-alert-success"><%= success_msg %></div>
-      <% } %>
-
-    <% if(error_msg && error_msg.length >0) { %>
-      <div class="custom-alert"><%= error_msg %></div>
-      <%}%>
-
-    <% if(error && error.length > 0) { %>
-      <div class="custom-alert"><%= error_msg %></div>
-      <% }%>
-        
     <nav class="navbar">
       <h4><a href="/index.html">InvestRight</a> </h4>
       <ul class="nav-list">
@@ -43,19 +29,11 @@
     </nav>
 
     <main class="profile-container">
-
       <div class="tab-navigation">
-          <button class="tab-button active" data-tab="profile"><span class="material-symbols-outlined">
-            account_circle
-            </span> Profile</button>
-          <button class="tab-button" data-tab="reports"><span class="material-symbols-outlined">
-            report
-            </span> Reports</button>
-          <button class="tab-button" data-tab="tips"><span class="material-symbols-outlined">
-            lightbulb_2
-            </span> Tips</button>
-        </div>
-      
+        <button class="tab-button active" data-tab="profile">Profile</button>
+        <button class="tab-button" data-tab="reports">📄 Reports</button>
+        <button class="tab-button" data-tab="tips">💡 Tips</button>
+      </div>
 
       <div class="tab-content active" id="profile">
         <div class="card">

@@ -18,10 +18,13 @@ router.post(
         postedBy: req.user._id, // Assuming req.user exists after authentication
       });
       await newTip.save();
+      req.flash("success_msg", "Tip added successfully");
       res.redirect("/tips");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Error adding tip");
+      req.flash("error_msg", "Error addng tips");
+      res.status(500);
+      // .send("Error adding tip");
     }
   }
 );
@@ -35,7 +38,9 @@ router.get("/", ensureAuthenticated, async (req, res) => {
     res.render("tips", { tips });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error fetching tips");
+    req.flash("error_msg", "Error fetching tips");
+    res.status(500);
+    // .send("Error fetching tips");
   }
 });
 
@@ -53,7 +58,9 @@ router.post("/:id/upvote", ensureAuthenticated, async (req, res) => {
     res.redirect("/tips");
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error upvoting");
+    req.flash("error_msg", "Error upvoting");
+    res.status(500);
+    // .send("Error upvoting");
   }
 });
 
@@ -71,25 +78,29 @@ router.post("/:id/downvote", ensureAuthenticated, async (req, res) => {
     res.redirect("/tips");
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error downvoting");
+    req.flash("error_msg", "Error downvoting");
+    res.status(500);
+    // .send("Error downvoting");
   }
 });
 
 // Delete a tip
-// router.post(
-//   "/:id/delete",
-//   ensureAuthenticated,
-//   checkRole(["advisor", "admin"]),
-//   async (req, res) => {
-//     try {
-//       await Tip.findByIdAndDelete(req.params.id);
-//       res.redirect("/tips");
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).send("Error deleting tip");
-//     }
-//   }
-// );
+router.post(
+  "/:id/delete",
+  ensureAuthenticated,
+  checkRole(["advisor", "admin"]),
+  async (req, res) => {
+    try {
+      await Tip.findByIdAndDelete(req.params.id);
+      req.flash("success_msg", "Tip deleted successfully");
+      res.redirect("/tips");
+    } catch (err) {
+      console.error(err);
+      req.flash("error_msg", "Error deleting tip");
+      res.status(500).send("Error deleting tip");
+    }
+  }
+);
 
 router.post(
   "/:id/verify",

@@ -1,0 +1,100 @@
+:root {
+  --primary: #00cc99;
+  --danger: #e63946;
+  --bg: #f9f9f9;
+  --text: #333;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background: var(--primary);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.profile-wrapper {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: var(--primary);
+  color: white;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  margin: 0.4rem;
+  border: none;
+  border-radius: 5px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn.danger {
+  background: var(--danger);
+}
+
+.footer {
+  background: #333;
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer a {
+  color: #ccc;
+  margin-left: 1rem;
+  text-decoration: none;
+}

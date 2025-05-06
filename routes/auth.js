@@ -532,6 +532,9 @@ router.post("/login", (req, res, next) => {
       return res.status(401).json({ success: false, message: info.message });
 
     req.session.tempUserId = user._id;
+
+    req.flash("success_msg", "Password verified.");
+
     return res
       .status(200)
       .json({ success: true, message: "Password verified" });
@@ -545,23 +548,28 @@ router.post("/verify-pin", async (req, res) => {
     const user = await User.findById(req.session.tempUserId);
 
     if (!user || !(await user.compareSecurityPin(securityPin))) {
+      req.flash("success_msg", "You are logged out");
       return res
         .status(401)
         .json({ success: false, message: "Invalid security PIN." });
     }
 
     req.login(user, (err) => {
-      if (err)
+      if (err) {
+        req.flash("error_msg", "Login failed.");
         return res
           .status(500)
           .json({ success: false, message: "Login failed" });
+      }
       delete req.session.tempUserId;
+      req.flash("error_msg", "Login Successfull.");
       return res
         .status(200)
         .json({ success: true, message: "Login successful" });
     });
   } catch (err) {
     console.error(err);
+    req.flash("error_msg", "Server error.");
     return res.status(500).json({ success: false, message: "Server error" });
   }
 });
@@ -622,13 +630,13 @@ router.get("/profile-page", ensureAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/reset-password", async (req, res) => {
-  res.render("reset-password");
-});
+// router.get("/reset-password", async (req, res) => {
+//   res.render("reset-password");
+// });
 
-router.get("/reset-pin", async (req, res) => {
-  res.render("reset-pin");
-});
+// router.get("/reset-pin", async (req, res) => {
+//   res.render("reset-pin");
+// });
 
 // 📌 Reset Password (Requires Current Password)
 router.post("/reset-password", ensureAuthenticated, async (req, res) => {
@@ -644,9 +652,10 @@ router.post("/reset-password", ensureAuthenticated, async (req, res) => {
 
   user.password = newPassword;
   await user.save();
+  req.flash("success_msg", "Reset Password successfull!");
+  return res.redirect("profile-page");
 
-  //res.redirect("profile-page");
-  res.json({ message: "Password successfully updated!" });
+  // res.json({ message: "Password successfully updated!" });
 });
 
 // 📌 Reset Security PIN (Requires Current PIN)
@@ -664,7 +673,8 @@ router.post("/reset-pin", ensureAuthenticated, async (req, res) => {
   user.securityPin = newPin;
   await user.save();
 
-  res.json({ message: "Security PIN successfully updated!" });
+  req.flash("success_msg", "Reset Pin successfull!");
+  return res.redirect("profile-page");
 });
 
 router.post("/delete/self/:id", async (req, res) => {
@@ -675,7 +685,9 @@ router.post("/delete/self/:id", async (req, res) => {
     return res.redirect("profile-page");
   }
   await user.deleteOne();
-  res.redirect("profile-page");
+  req.flash("success_msg", "Profile Deleted.");
+  return res.redirect("dashboard");
+  // res.redirect("profile-page");
 });
 
 router.get("/delete/self", async (req, res) => {
